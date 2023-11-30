@@ -17,6 +17,8 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
+            let options = {};
+            let geojsonTileLayer = L.jsonGridTile('http://192.168.3.101/tile/{z}/{x}/{y}.json',options).addTo(map);
         </script>
     </body>
 </html>

@@ -1,3 +1,4 @@
+# from tools import vt_bytes_to_geojson
 from vt2geojson.tools import vt_bytes_to_geojson
 from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse
@@ -30,10 +31,9 @@ async def tile(z:int,x:int,y:int):
         with gzip.open(zipped_io,"rb") as zipped_pbf:
             pbf = zipped_pbf.read()
         geojson = vt_bytes_to_geojson(pbf,x,y,z)
-        print("found")
         return JSONResponse(content=geojson,)
     else:
-        return Response()
+        return JSONResponse(status_code=200,content={})
 ############################# 
 if __name__ == "__main__":
     z = 9
@@ -46,4 +46,3 @@ if __name__ == "__main__":
     with gzip.open(zipped_io,"rb") as zipped_pbf:
         pbf = zipped_pbf.read()
     geojson = vt_bytes_to_geojson(pbf,x,y,z)
-    print(geojson)
